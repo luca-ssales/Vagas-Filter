@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VagasFilter | Otimizador de Currículo Especialista em ATS e RH</title>
+  <meta name="description" content="Seu currículo no lugar certo. Otimize seu currículo com inteligência artificial para vagas reais e plataformas ATS (Gupy, Kenoby, Workday).">
+  
+  <!-- Fontes Google: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Estilos Customizados (Tema Claro Conforme Referência) -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- ========================================================== -->
+    <!-- 1. COLUNA ESQUERDA: NAVEGAÇÃO E MARCA                     -->
+    <!-- ========================================================== -->
+    <aside class="sidebar-nav">
+      <!-- Logo da Marca -->
+      <div class="brand-header">
+        <div class="brand-logo-icon">
+          <i class="fa-solid fa-file-shield"></i>
+        </div>
+        <div class="brand-text">
+          <div class="brand-title-wrap">
+            <span class="brand-name">VagasFilter</span>
+            <span class="badge-ats">ATS EXPERT AI</span>
+          </div>
+          <p class="brand-tagline">Seu currículo no lugar certo.</p>
+        </div>
+      </div>
+
+      <!-- Links de Navegação -->
+      <nav class="nav-menu">
+        <a href="#" class="nav-item active" id="btn-nav-new">
+          <i class="fa-regular fa-comment-dots"></i>
+          <span>Novo currículo</span>
+        </a>
+      </nav>
+
+      <!-- Card Inspiracional Inferior -->
+      <div class="promo-card">
+        <div class="promo-icon">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+        </div>
+        <p class="promo-text">
+          <strong>Mais que um currículo.</strong><br>
+          É a sua próxima oportunidade.
+        </p>
+      </div>
+    </aside>
+
+    <!-- ========================================================== -->
+    <!-- 2. COLUNA CENTRAL: CHAT PRINCIPAL                         -->
+    <!-- ========================================================== -->
+    <main class="chat-main">
+      <!-- Header do Chat -->
+      <header class="chat-topbar">
+        <div class="assistant-profile">
+          <div class="robot-avatar">
+            <i class="fa-solid fa-robot"></i>
+          </div>
+          <div class="assistant-info">
+            <div class="assistant-name-wrap">
+              <h2>VagasFilter Assistant</h2>
+              <span class="status-online"><span class="dot"></span> Online</span>
+            </div>
+            <p class="assistant-bio">Especialista em recrutamento, ATS e otimização de currículos</p>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <div class="powered-badge">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Powered by Groq</span>
+          </div>
+          <button id="btn-reset-session" class="btn-clean" title="Reiniciar conversa">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Mensagens da Conversa -->
+      <div class="chat-scroll-area" id="chat-messages">
+        <!-- Inseridas dinamicamente via JS -->
+      </div>
+
+      <!-- Barra de Entrada Inferior -->
+      <div class="chat-footer">
+        <!-- Barra de sugestões extras rápidas -->
+        <div class="extras-chips-bar" id="extras-chips-bar">
+          <span class="extras-tag"><i class="fa-solid fa-sparkles"></i> Extras:</span>
+          <button class="chip-action" data-prompt="Gere uma carta de apresentação curta e personalizada para esta vaga com base no meu currículo.">
+            <i class="fa-regular fa-envelope"></i> Carta de Apresentação
+          </button>
+          <button class="chip-action" data-prompt="Crie uma Headline e seção 'Sobre' para o meu LinkedIn alinhadas a esta vaga.">
+            <i class="fa-brands fa-linkedin"></i> Headline & Sobre LinkedIn
+          </button>
+          <button class="chip-action" data-prompt="Quais são as 8 a 10 perguntas prováveis de entrevista para essa vaga e como responder no método STAR?">
+            <i class="fa-solid fa-circle-question"></i> Perguntas de Entrevista
+          </button>
+        </div>
+
+        <form id="chat-form" class="chat-input-form">
+          <button type="button" id="btn-open-attachment" class="btn-attach" title="Anexar Currículo ou Link da Vaga">
+            <i class="fa-solid fa-paperclip"></i>
+          </button>
+          <input type="text" id="chat-user-input" class="chat-input-field" placeholder="Digite uma mensagem ou pergunte algo ao VagasFilter..." autocomplete="off">
+          <button type="submit" id="btn-send-message" class="btn-send" title="Enviar mensagem">
+            <i class="fa-solid fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+    </main>
+
+    <!-- ========================================================== -->
+    <!-- 3. COLUNA DIREITA: STEPPER DE STATUS E ARQUIVOS           -->
+    <!-- ========================================================== -->
+    <aside class="sidebar-status">
+      
+      <!-- Card 1: Processo em Andamento / Stepper -->
+      <div class="status-card">
+        <div class="status-card-header">
+          <div class="status-header-icon">
+            <i class="fa-solid fa-clipboard-check"></i>
+          </div>
+          <div>
+            <h3>Processo em andamento</h3>
+            <p>Seu currículo está sendo personalizado para a vaga.</p>
+          </div>
+        </div>
+
+        <div class="stepper-list">
+          <!-- Passo 1 -->
+          <div class="step-item" id="step-1">
+            <div class="step-indicator">
+              <i class="fa-solid fa-check icon-done"></i>
+              <span class="step-num">1</span>
+            </div>
+            <div class="step-content">
+              <h4>1. Leitor do currículo</h4>
+              <p>Extração fiel sem IA ou visão para escaneados...</p>
+            </div>
+          </div>
+
+          <!-- Passo 2 -->
+          <div class="step-item" id="step-2">
+            <div class="step-indicator">
+              <i class="fa-solid fa-check icon-done"></i>
+              <span class="step-num">2</span>
+            </div>
+            <div class="step-content">
+              <h4>2. Analista da vaga</h4>
+              <p>Agente rápido extraindo requisitos e palavras-chave...</p>
+            </div>
+          </div>
+
+          <!-- Passo 3 -->
+          <div class="step-item" id="step-3">
+            <div class="step-indicator">
+              <i class="fa-solid fa-check icon-done"></i>
+              <span class="step-num">3</span>
+            </div>
+            <div class="step-content">
+              <h4>3. Adaptador de currículo</h4>
+              <p>Agente sênior adaptando com zero alucinação...</p>
+            </div>
+          </div>
+
+          <!-- Passo 4 -->
+          <div class="step-item" id="step-4">
+            <div class="step-indicator">
+              <i class="fa-solid fa-check icon-done"></i>
+              <span class="step-num">4</span>
+            </div>
+            <div class="step-content">
+              <h4>4. Auditor de fidelidade</h4>
+              <p>Conferência antirruído e validação de fidelidade...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Arquivos Enviados -->
+      <div class="status-card">
+        <div class="status-card-title">
+          <i class="fa-regular fa-folder-open"></i>
+          <h4>Arquivos enviados</h4>
+        </div>
+
+        <div class="uploaded-files-list" id="uploaded-files-list">
+          <!-- Item CV -->
+          <div class="file-badge-item" id="badge-cv-item">
+            <div class="file-badge-icon pdf">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <div class="file-badge-info">
+              <span class="file-badge-name" id="badge-cv-name">Nenhum currículo enviado</span>
+              <span class="file-badge-meta" id="badge-cv-meta">Clique no clipe 📎 para anexar</span>
+            </div>
+          </div>
+
+          <!-- Item Vaga -->
+          <div class="file-badge-item" id="badge-job-item">
+            <div class="file-badge-icon link">
+              <i class="fa-solid fa-link"></i>
+            </div>
+            <div class="file-badge-info">
+              <span class="file-badge-name" id="badge-job-name">Nenhuma vaga informada</span>
+              <span class="file-badge-meta" id="badge-job-meta">Texto ou link da vaga</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Dica do VagasFilter -->
+      <div class="tip-card">
+        <div class="tip-header">
+          <i class="fa-regular fa-lightbulb"></i>
+          <span>Dica do VagasFilter</span>
+        </div>
+        <p class="tip-body">
+          Quanto mais detalhes sobre a vaga, maior a chance de seu currículo se destacar nos algoritmos de triagem!
+        </p>
+      </div>
+
+      <!-- Footer da Coluna Direita -->
+      <footer class="status-footer">
+        <div class="footer-shield"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="footer-text">
+          <strong>VagasFilter</strong><br>
+          Tecnologia que conecta talentos às melhores oportunidades.
+        </div>
+      </footer>
+
+    </aside>
+  </div>
+
+  <!-- ========================================================== -->
+  <!-- MODAL DE ANEXO DE CURRÍCULO E VAGA (CLIPE)                -->
+  <!-- ========================================================== -->
+  <div class="modal-overlay hidden" id="attachment-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <h3>Enviar Currículo e Detalhes da Vaga</h3>
+        </div>
+        <button type="button" class="btn-close-modal" id="btn-close-modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 1. Currículo -->
+        <div class="modal-section">
+          <label class="modal-label">
+            <i class="fa-solid fa-id-card"></i>
+            <strong>1. Seu Currículo Atual</strong> (PDF, TXT ou Imagem)
+          </label>
+          <div class="modal-dropzone" id="modal-cv-dropzone">
+            <input type="file" id="modal-cv-file" accept=".pdf,.txt,.md,.png,.jpg,.jpeg,.webp" class="hidden-input">
+            <i class="fa-solid fa-file-arrow-up drop-icon"></i>
+            <span id="cv-drop-label">Clique para selecionar PDF/TXT/Imagem ou arraste aqui</span>
+          </div>
+          <div class="modal-text-toggle">
+            <button type="button" class="btn-text-link" id="btn-toggle-modal-cv-text">Ou colar texto do currículo</button>
+            <textarea id="modal-cv-text" class="modal-textarea hidden" rows="4" placeholder="Cole aqui seu currículo atual..."></textarea>
+          </div>
+        </div>
+
+        <!-- 2. Vaga -->
+        <div class="modal-section">
+          <label class="modal-label">
+            <i class="fa-solid fa-bullseye"></i>
+            <strong>2. Descrição da Vaga</strong> (Link ou Texto)
+          </label>
+          <div class="modal-input-group">
+            <input type="url" id="modal-job-url" class="modal-input" placeholder="Cole o link da vaga (se público)">
+            <button type="button" id="btn-modal-fetch-url" class="btn-modal-action">Buscar</button>
+          </div>
+          <div class="modal-text-toggle">
+            <button type="button" class="btn-text-link" id="btn-toggle-modal-job-text">Colar texto da vaga diretamente</button>
+            <textarea id="modal-job-text" class="modal-textarea" rows="4" placeholder="Cole os requisitos e descrição da vaga aqui..."></textarea>
+          </div>
+        </div>
+
+        <!-- Opcionais -->
+        <details class="modal-accordion">
+          <summary>Opções adicionais (LinkedIn, Nível de Experiência)</summary>
+          <div class="modal-accordion-content">
+            <input type="text" id="modal-linkedin" class="modal-input" placeholder="Perfil LinkedIn (ex.: linkedin.com/in/seunome)">
+            <select id="modal-experience" class="modal-input" style="margin-top:8px;">
+              <option value="">Nível de Experiência</option>
+              <option value="Jovem Aprendiz">Jovem Aprendiz</option>
+              <option value="Primeiro Emprego">Primeiro Emprego / Estágio</option>
+              <option value="Júnior">Júnior</option>
+              <option value="Pleno">Pleno</option>
+              <option value="Sênior">Sênior</option>
+              <option value="Transição de Carreira">Transição de Carreira</option>
+            </select>
+          </div>
+        </details>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="btn-modal-cancel" class="btn-secondary-light">Cancelar</button>
+        <button type="button" id="btn-modal-confirm" class="btn-primary-green">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Enviar e Otimizar Currículo</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast de Notificação -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Markdown-it library -->
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it@14.1.0/dist/markdown-it.min.js"></script>
+  <!-- Script Principal da Aplicação -->
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

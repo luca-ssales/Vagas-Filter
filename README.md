@@ -2,7 +2,8 @@
 
 > Agente de IA que ajuda a criar e melhorar currículos, do rascunho ao documento pronto em minutos.
 
-**Aluno:** Lucas Sales
+**Aluno:** [seu nome]
+**Turma:** [sua turma]
 **Aplicação online:** [link do deploy no Render]
 
 ---
@@ -112,6 +113,15 @@ A aplicação está publicada no **Render**. Para publicar a sua:
 
 O comportamento do agente é definido no arquivo [`prompt.md`](prompt.md), que contém o prompt usado para criá-lo: papel, tom de voz, regras e formato das respostas.
 
+---
+
+## 🔮 Aplicações Futuras
+
+- **Adaptação por vaga:** colar a descrição da vaga e ajustar o currículo para ela
+- **Simulador de entrevista:** perguntas baseadas no currículo, com feedback
+- **Carta de apresentação e perfil de LinkedIn:** textos alinhados ao currículo
+- **Uso institucional:** escolas, ONGs e projetos sociais de empregabilidade
+- **Exportação em PDF** com modelos visuais prontos
 
 ---
 
